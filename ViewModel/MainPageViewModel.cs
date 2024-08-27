@@ -21,8 +21,6 @@ namespace MarketplaceApp.ViewModel
         public Command RefreshCommand { get; set; }
 
         private bool _isRefreshing;
-
-        private bool _isEmpty;
         public bool IsRefreshing
         {
             get => _isRefreshing;
@@ -32,20 +30,6 @@ namespace MarketplaceApp.ViewModel
                 {
                     _isRefreshing = value;
                     OnPropertyChanged(nameof(IsRefreshing));
-                }
-            }
-        }
-
-        
-        public bool IsEmpty 
-        {
-            get => _isEmpty;
-            set 
-            {
-                if (_isEmpty != value)
-                {
-                    _isEmpty = value;
-                    OnPropertyChanged(nameof(IsEmpty));
                 }
             }
         }
@@ -64,6 +48,14 @@ namespace MarketplaceApp.ViewModel
 
         private async Task OnCategorySelected(CategoryWrapper selectedCategory)
         {
+
+            foreach (var category in Categories)
+            {
+                category.IsSelected = false;
+            }
+
+            selectedCategory.IsSelected = true;
+
             var response = await _apiClientService.GetProducts();
 
             if (response.IsSuccessful && response.Data != null)
@@ -75,12 +67,12 @@ namespace MarketplaceApp.ViewModel
                     : response.Data.Where(p => p.Category == selectedCategory.RealName);
 
 
-                Products = new ObservableCollection<StoreProductResponse>(filteredProducts);
+                //Products = new ObservableCollection<StoreProductResponse>(filteredProducts);
 
-                //foreach (var product in filteredProducts)
-                //{
-                //    Products.Add(product);
-                //}
+                foreach (var product in filteredProducts)
+                {
+                    Products.Add(product);
+                }
             }
         }
 
@@ -90,17 +82,14 @@ namespace MarketplaceApp.ViewModel
 
             if (response.IsSuccessful && response.Data != null)
             {
-                IsEmpty = false;
                 Products.Clear();
 
-                Products = new ObservableCollection<StoreProductResponse>(response.Data);
-                //foreach (var product in response.Data)
-                //{
-                //    Products.Add(product);
-                //}
-                return;
+                //Products = new ObservableCollection<StoreProductResponse>(response.Data);
+                foreach (var product in response.Data)
+                {
+                    Products.Add(product);
+                }
             }
-            IsEmpty = true;
         }
 
         private async Task LoadCategories()
@@ -115,6 +104,7 @@ namespace MarketplaceApp.ViewModel
                     RealName = "All",
                     Icon = GetIcon("All"),
                     FormatName = FormatName("All"),
+                    IsSelected = true,
                 });
                 foreach (var category in response.Data)
                 {

@@ -2,14 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MarketplaceApp.Views.MainPage"
-             xmlns:vm="clr-namespace:MarketplaceApp.ViewModel"
-             xmlns:wrapper="clr-namespace:MarketplaceApp.Model.Wrappers"
-             xmlns:model="clr-namespace:MarketplaceApp.Model"
-             x:DataType="vm:MainPageViewModel"
              Title="">
 
 
-    <Grid RowDefinitions="auto,*,auto">
+    <Grid RowDefinitions="auto,auto,*,auto">
 
         <!-- Banner -->
         <Image
@@ -17,7 +13,7 @@
             Aspect="AspectFill"
             HeightRequest="240"
             Grid.Row="0"/>
-
+ 
         <Grid Grid.Row="0" Padding="10" RowDefinitions="auto,auto,auto,auto,auto" ColumnDefinitions="*,*,auto,auto">
             <!-- Search Bar -->
             <SearchBar
@@ -93,6 +89,56 @@
                 HeightRequest="35"
                 WidthRequest="95"/>
         </Grid>
+
+        <!-- Buttons below banner -->
+
+        <CollectionView  
+            Grid.Row="1" 
+            ItemsSource="{Binding Categories}" 
+            ItemsLayout="HorizontalGrid"
+            Margin="0,0,0,40">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid 
+                        Padding="5"
+                        RowDefinitions="*, *"
+                        ColumnDefinitions="*">
+                        <StackLayout 
+                            Grid.Row="0"
+                            Margin="0,7,0,10">
+                            <Button
+                                Text="{Binding Icon}"
+                                FontFamily="FASolid"
+                                TextColor="Black"
+                                BackgroundColor="#E7E9EB"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                HorizontalOptions="Fill"
+                                Command="{Binding BindingContext.SelectCategoryCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                CommandParameter="{Binding .}">
+
+                            </Button>
+                            <Label 
+                                Grid.Row="1"
+                                Text="{Binding FormatName}" 
+                                FontSize="10" 
+                                Margin="20,0"/>
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+        <Image 
+                Grid.Row="1"
+                Source="slide.png"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="20"
+                HeightRequest="20"
+                Margin="0,80,0,0"/>
+
 
         <!--<Grid Grid.Row="1" RowDefinitions="*,*,*,*"  ColumnDefinitions="*,*,*,*,*" Padding="0,15,0,5">
             --><!-- Category --><!--
@@ -196,58 +242,15 @@
                 <Label Grid.Column="0" Text="Best Sale Product" FontSize="Medium" FontAttributes="Bold" Padding="15,20,0,10"  BackgroundColor="#FCFCFC"/>
                 <Label Grid.Column="1" Text="See more" FontSize="14" TextColor="#2A927A" Padding="0,23,15,10" HorizontalTextAlignment="End" BackgroundColor="#FCFCFC"/>
             </Grid>-->
-            <RefreshView Grid.Row="1" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-                <CollectionView ItemsSource="{Binding Products}" ItemsLayout="VerticalList" BackgroundColor="#E7E9EB">
+            <RefreshView Grid.Row="2" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+                <CollectionView ItemsSource="{Binding Products}" ItemsLayout="VerticalGrid, 2" BackgroundColor="#E7E9EB">
                     <CollectionView.EmptyView>
-                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsEmpty}">
-                        <Label Text="No products available" FontSize="20" TextColor="Gray"/>
-                    </StackLayout>
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="No products available" FontSize="20" TextColor="Gray"/>
+                        </StackLayout>
                     </CollectionView.EmptyView>
-                    
-                <!-- Buttons below banner -->
-                <CollectionView.Header>
-                    
-                    <CollectionView 
-                        BackgroundColor="Aqua"
-                        ItemsSource="{Binding Categories}" 
-                        ItemsLayout="HorizontalGrid"
-                        Margin="0,0,0,40">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate
-                                    x:DataType="wrapper:CategoryWrapper">
-                                    <Grid 
-                                        HeightRequest="80"
-                                    Padding="5"
-                                    RowDefinitions="*, *"
-                                    ColumnDefinitions="*">
-                                        <StackLayout 
-                                        Grid.Row="0"
-                                        Margin="0,7,0,10">
-                                            <Button
-                                            Text="{Binding Icon}"
-                                            FontFamily="FASolid"
-                                            TextColor="Black"
-                                            BackgroundColor="#E7E9EB"
-                                            HeightRequest="40"
-                                            WidthRequest="40"
-                                            HorizontalOptions="Fill"
-                                            Command="{Binding BindingContext.SelectCategoryCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                            CommandParameter="{Binding .}"/>
-                                            <Label 
-                                            Grid.Row="1"
-                                            Text="{Binding FormatName}" 
-                                            FontSize="10" 
-                                            Margin="20,0"/>
-                                        </StackLayout>
-                                    </Grid>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                </CollectionView.Header>
-                    
                     <CollectionView.ItemTemplate>
-                        <DataTemplate
-                            x:DataType="model:StoreProductResponse">
+                        <DataTemplate>
                             <Frame Padding="10" BorderColor="White" CornerRadius="2" Margin="10">
                                 <VerticalStackLayout>
                                     <!-- Product Image -->
