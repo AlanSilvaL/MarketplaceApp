@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MarketplaceApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:MarketplaceApp.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="MarketplaceApp">
+
+    <TabBar>
+        <ShellContent
+            Title="Home"
+            Icon="home.png"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Route="MainPage" />
+        <ShellContent
+            Title="Vaucher"
+            Icon="vaucher.png"
+            ContentTemplate="{DataTemplate views:Vaucher}"
+            Route="SettingsPage" />
+        <ShellContent
+            Title="Wallet"
+            Icon="wallet.png"
+            ContentTemplate="{DataTemplate views:Wallet}"
+            Route="SettingsPage" />
+        <ShellContent
+            Title="Settings"
+            Icon="settings.png"
+            ContentTemplate="{DataTemplate views:Settings}"
+            Route="SettingsPage" />
+    </TabBar>
+    
+</Shell>
