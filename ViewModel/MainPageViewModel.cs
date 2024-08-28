@@ -36,7 +36,6 @@ namespace MarketplaceApp.ViewModel
             }
         }
 
-        
         public bool IsEmpty 
         {
             get => _isEmpty;
@@ -74,13 +73,10 @@ namespace MarketplaceApp.ViewModel
                     ? response.Data
                     : response.Data.Where(p => p.Category == selectedCategory.RealName);
 
-
-                Products = new ObservableCollection<StoreProductResponse>(filteredProducts);
-
-                //foreach (var product in filteredProducts)
-                //{
-                //    Products.Add(product);
-                //}
+                foreach (var product in filteredProducts)
+                {
+                    Products.Add(product);
+                }
             }
         }
 
@@ -93,11 +89,10 @@ namespace MarketplaceApp.ViewModel
                 IsEmpty = false;
                 Products.Clear();
 
-                Products = new ObservableCollection<StoreProductResponse>(response.Data);
-                //foreach (var product in response.Data)
-                //{
-                //    Products.Add(product);
-                //}
+                foreach (var product in response.Data)
+                {
+                    Products.Add(product);
+                }
                 return;
             }
             IsEmpty = true;

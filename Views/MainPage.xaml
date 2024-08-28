@@ -9,7 +9,7 @@
              Title="">
 
 
-    <Grid RowDefinitions="auto,*,auto">
+    <Grid RowDefinitions="auto,*">
 
         <!-- Banner -->
         <Image
@@ -94,136 +94,35 @@
                 WidthRequest="95"/>
         </Grid>
 
-        <!--<Grid Grid.Row="1" RowDefinitions="*,*,*,*"  ColumnDefinitions="*,*,*,*,*" Padding="0,15,0,5">
-            --><!-- Category --><!--
-            <StackLayout Grid.Column="0" Orientation="Vertical" HorizontalOptions="Center" Spacing="5">
-                <Button
-                    ImageSource="category.png"
-                    BackgroundColor="#E7E9EB"
-                    HeightRequest="40"
-                    WidthRequest="40"
-                    Padding="7">
-                    <Button.Triggers>
-                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                            <Setter Property="BackgroundColor" Value="LightGray"/>
-                        </Trigger>
-                    </Button.Triggers>
-                </Button>
-                <Label Text="Category" FontSize="10" HorizontalOptions="Center" />
-            </StackLayout>
-
-            --><!-- Flight --><!--
-            <StackLayout Grid.Column="1" Orientation="Vertical" HorizontalOptions="Center" Spacing="5">
-                <Button
-                    ImageSource="flight.png"
-                    BackgroundColor="#E7E9EB"
-                    HeightRequest="40"
-                    WidthRequest="40"
-                    Padding="7">
-                    <Button.Triggers>
-                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                            <Setter Property="BackgroundColor" Value="LightGray"/>
-                        </Trigger>
-                    </Button.Triggers>
-                </Button>
-                <Label Text="Flight" FontSize="10" HorizontalOptions="Center" />
-            </StackLayout>
-
-            --><!-- Bill --><!--
-            <StackLayout Grid.Column="2" Orientation="Vertical" HorizontalOptions="Center" Spacing="5">
-                <Button
-                    ImageSource="bill.png"
-                    BackgroundColor="#E7E9EB"
-                    HeightRequest="40"
-                    WidthRequest="40"
-                    Padding="7">
-                    <Button.Triggers>
-                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                            <Setter Property="BackgroundColor" Value="LightGray"/>
-                        </Trigger>
-                    </Button.Triggers>
-                </Button>
-                <Label Text="Bill" FontSize="10" HorizontalOptions="Center" />
-            </StackLayout>
-
-            --><!-- Data Plan --><!--
-            <StackLayout Grid.Column="3" Orientation="Vertical" HorizontalOptions="Center" Spacing="5">
-                <Button
-                    ImageSource="data.png"
-                    BackgroundColor="#E7E9EB"
-                    HeightRequest="40"
-                    WidthRequest="40"
-                    Padding="7">
-                    <Button.Triggers>
-                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                            <Setter Property="BackgroundColor" Value="LightGray"/>
-                        </Trigger>
-                    </Button.Triggers>
-                </Button>
-                <Label Text="Data Plan" FontSize="10" HorizontalOptions="Center" />
-            </StackLayout>
-
-            --><!-- Top up --><!--
-            <StackLayout Grid.Column="4" Orientation="Vertical" HorizontalOptions="Center" Spacing="5" Padding="0,0,0,20">
-                <Button
-                    ImageSource="coin.png"
-                    BackgroundColor="#E7E9EB"
-                    HeightRequest="40"
-                    WidthRequest="40"
-                    Padding="7">    
-                    <Button.Triggers>
-                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                            <Setter Property="BackgroundColor" Value="LightGray"/>
-                        </Trigger>
-                    </Button.Triggers>
-                </Button>
-                <Label Text="Top up" FontSize="10" HorizontalOptions="Center" />
-            </StackLayout>
-
-            <Image 
-                Grid.Row="3"
-                Grid.Column="2"
-                Source="slide.png"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="20"
-                HeightRequest="20"/>
-        </Grid>-->
-
-        <!-- Collection products -->
-        <!--<StackLayout Grid.Row="2">
-            <Grid ColumnDefinitions="*,*">
-                <Label Grid.Column="0" Text="Best Sale Product" FontSize="Medium" FontAttributes="Bold" Padding="15,20,0,10"  BackgroundColor="#FCFCFC"/>
-                <Label Grid.Column="1" Text="See more" FontSize="14" TextColor="#2A927A" Padding="0,23,15,10" HorizontalTextAlignment="End" BackgroundColor="#FCFCFC"/>
-            </Grid>-->
-            <RefreshView Grid.Row="1" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-                <CollectionView ItemsSource="{Binding Products}" ItemsLayout="VerticalList" BackgroundColor="#E7E9EB">
-                    <CollectionView.EmptyView>
-                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsEmpty}">
+        <!-- Collection products/ Buttons below banner -->
+        <RefreshView Grid.Row="1" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView ItemsSource="{Binding Products}" ItemsLayout="VerticalGrid, 2" BackgroundColor="#E7E9EB">
+                <CollectionView.EmptyView>
+                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsEmpty}">
                         <Label Text="No products available" FontSize="20" TextColor="Gray"/>
                     </StackLayout>
-                    </CollectionView.EmptyView>
-                    
+                </CollectionView.EmptyView>
+
                 <!-- Buttons below banner -->
                 <CollectionView.Header>
-                    
+                    <!--<VerticalStackLayout>-->
                     <CollectionView 
-                        BackgroundColor="Aqua"
+                        BackgroundColor="White"
                         ItemsSource="{Binding Categories}" 
                         ItemsLayout="HorizontalGrid"
                         Margin="0,0,0,40">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate
-                                    x:DataType="wrapper:CategoryWrapper">
-                                    <Grid 
-                                        HeightRequest="80"
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate
+                                x:DataType="wrapper:CategoryWrapper">
+                                <Grid 
+                                    HeightRequest="80"
                                     Padding="5"
-                                    RowDefinitions="*, *"
+                                    RowDefinitions="*,*"
                                     ColumnDefinitions="*">
-                                        <StackLayout 
+                                    <StackLayout 
                                         Grid.Row="0"
                                         Margin="0,7,0,10">
-                                            <Button
+                                        <Button
                                             Text="{Binding Icon}"
                                             FontFamily="FASolid"
                                             TextColor="Black"
@@ -233,42 +132,49 @@
                                             HorizontalOptions="Fill"
                                             Command="{Binding BindingContext.SelectCategoryCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                             CommandParameter="{Binding .}"/>
-                                            <Label 
+                                        <Label 
                                             Grid.Row="1"
                                             Text="{Binding FormatName}" 
                                             FontSize="10" 
                                             Margin="20,0"/>
-                                        </StackLayout>
-                                    </Grid>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                                    </StackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <!--<Image 
+                            Source="slide.png"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="20"
+                            HeightRequest="20"/>
+                    </VerticalStackLayout>-->
                 </CollectionView.Header>
-                    
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate
+
+                <!-- Collection products -->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate
                             x:DataType="model:StoreProductResponse">
-                            <Frame Padding="10" BorderColor="White" CornerRadius="2" Margin="10">
-                                <VerticalStackLayout>
-                                    <!-- Product Image -->
-                                    <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="100" WidthRequest="100"/>
-                                    <!-- Product Type -->
-                                    <Label Text="{Binding Category}" FontSize="13" TextColor="Gray" Padding="0,10,0,0"/>
-                                    <!-- Product Name -->
-                                    <Label Text="{Binding Title}" FontSize="13" FontAttributes="Bold" />
-                                    <!-- Rating and Price -->
-                                    <Grid ColumnDefinitions="auto,auto,*" Padding="0,7,0,0" >
-                                        <Image Source="star.png" HeightRequest="10" WidthRequest="10" Grid.Column="0"/>
-                                        <Label Text="{Binding Rating.Rate}" FontSize="12" TextColor="Gray" Grid.Column="1" Margin="5,4,0,0"/>
-                                        <Label Text="{Binding Price, StringFormat='{}{0:C}'}" FontSize="18" HorizontalOptions="End" TextColor="#2A927A" FontAttributes="Bold" Grid.Column="2"/>
-                                    </Grid>
-                                </VerticalStackLayout>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
-        <!--</StackLayout>-->
+                        <Frame Padding="10" BorderColor="White" CornerRadius="2" Margin="10">
+                            <VerticalStackLayout>
+                                <!-- Product Image -->
+                                <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="100" WidthRequest="100"/>
+                                <!-- Product Type -->
+                                <Label Text="{Binding Category}" FontSize="13" TextColor="Gray" Padding="0,10,0,0"/>
+                                <!-- Product Name -->
+                                <Label Text="{Binding Title}" FontSize="13" FontAttributes="Bold" />
+                                <!-- Rating and Price -->
+                                <Grid ColumnDefinitions="auto,auto,*" Padding="0,7,0,0" >
+                                    <Image Source="star.png" HeightRequest="10" WidthRequest="10" Grid.Column="0"/>
+                                    <Label Text="{Binding Rating.Rate}" FontSize="12" TextColor="Gray" Grid.Column="1" Margin="5,4,0,0"/>
+                                    <Label Text="{Binding Price, StringFormat='{}{0:C}'}" FontSize="18" HorizontalOptions="End" TextColor="#2A927A" FontAttributes="Bold" Grid.Column="2"/>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </Grid>
-    
+
 </ContentPage>
