@@ -116,20 +116,30 @@
                                 HorizontalOptions="Fill"
                                 Command="{Binding BindingContext.SelectCategoryCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                 CommandParameter="{Binding .}">
-
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding IsSelected}" Value="True">
+                                        <Setter Property="BackgroundColor" Value="#b7b7b7" />
+                                    </DataTrigger>
+                                </Button.Triggers>
                             </Button>
                             <Label 
                                 Grid.Row="1"
                                 Text="{Binding FormatName}" 
                                 FontSize="10" 
-                                Margin="20,0"/>
+                                Margin="20,0">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                        <Setter Property="FontAttributes" Value="Bold" />
+                                        <Setter Property="FontSize" Value="14" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
                         </StackLayout>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-
+        
         <Image 
                 Grid.Row="1"
                 Source="slide.png"
