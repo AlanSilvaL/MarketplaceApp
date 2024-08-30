@@ -49,6 +49,7 @@ namespace MarketplaceApp
         public static MauiAppBuilder RegisterViews( this MauiAppBuilder builder) 
         {
             builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<DetailPage>();
             return builder;
         }
 

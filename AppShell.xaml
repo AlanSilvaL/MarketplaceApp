@@ -14,9 +14,9 @@
             ContentTemplate="{DataTemplate views:MainPage}"
             Route="MainPage" />
         <ShellContent
-            Title="Vaucher"
+            Title="vaucher"
             Icon="vaucher.png"
-            ContentTemplate="{DataTemplate views:Vaucher}"
+            ContentTemplate="{DataTemplate views:DetailPage}"
             Route="SettingsPage" />
         <ShellContent
             Title="Wallet"

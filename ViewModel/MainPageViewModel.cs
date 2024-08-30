@@ -15,12 +15,14 @@ namespace MarketplaceApp.ViewModel
     public class MainPageViewModel : INotifyPropertyChanged
     {
         private readonly IApiClientService _apiClientService;
+
+        private bool _isRefreshing;
+
         public ObservableCollection<StoreProductResponse> Products { get; set; }
         public ObservableCollection<CategoryWrapper> Categories { get; set; }
         public Command<CategoryWrapper> SelectCategoryCommand { get; }
         public Command RefreshCommand { get; set; }
 
-        private bool _isRefreshing;
         public bool IsRefreshing
         {
             get => _isRefreshing;
