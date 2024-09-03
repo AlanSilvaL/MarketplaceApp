@@ -2,6 +2,7 @@
 using MarketplaceApp.Model;
 using MarketplaceApp.Model.Wrappers;
 using MarketplaceApp.Services;
+using MarketplaceApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,10 +19,25 @@ namespace MarketplaceApp.ViewModel
 
         private bool _isRefreshing;
 
+        private StoreProductResponse _selectedProduct;
+
         public ObservableCollection<StoreProductResponse> Products { get; set; }
         public ObservableCollection<CategoryWrapper> Categories { get; set; }
         public Command<CategoryWrapper> SelectCategoryCommand { get; }
         public Command RefreshCommand { get; set; }
+        public Command ProductSelectedCommand { get; }
+        public StoreProductResponse SelectedProduct
+        {
+            get => _selectedProduct;
+            set
+            {
+                if (_selectedProduct != value)
+                {
+                    _selectedProduct = value;
+                    OnPropertyChanged(nameof(SelectedProduct));
+                }
+            }
+        }
 
         public bool IsRefreshing
         {
@@ -43,9 +59,22 @@ namespace MarketplaceApp.ViewModel
             Categories = new ObservableCollection<CategoryWrapper>();
             RefreshCommand = new Command(async () => await RefreshProducts());
             SelectCategoryCommand = new Command<CategoryWrapper>(async (param) => await OnCategorySelected(param));
+            ProductSelectedCommand = new Command(async () => await OnProductSelected());
 
             GetProducts();
             LoadCategories();
+        }
+
+        private async Task OnProductSelected()
+        {
+            if (SelectedProduct != null)
+            {
+                var shellNavigation = new ShellNavigationState($"///{nameof(DetailPage)}");
+                await Shell.Current.GoToAsync(shellNavigation, true, new Dictionary<string, object>
+                {
+                    { "Product", SelectedProduct }
+                });
+            }
         }
 
         private async Task OnCategorySelected(CategoryWrapper selectedCategory)
@@ -173,13 +202,3 @@ namespace MarketplaceApp.ViewModel
         }
     }
 }
-
-
-
-//Products = new ObservableCollection<Product>
-//{
-//new Product { ImageSource = "shirt.jpg", Type = "Shirt", Name = "Essential Man Shirt", Rating = 4, Price = 19.99m },
-//new Product { ImageSource = "pants.jpg", Type = "Pants", Name = "denim pants", Rating = 5, Price = 22.80m },
-//new Product { ImageSource = "blackshirt.jpg", Type = "Shirt", Name = "Black Shirt", Rating = 5, Price = 17m },
-//new Product { ImageSource = "shirt.jpg", Type = "Shirt", Name = "Comfy Shirt", Rating = 3, Price = 15m }
-//};

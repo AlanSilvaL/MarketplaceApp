@@ -1,4 +1,6 @@
 using MarketplaceApp.ViewModel;
+using MarketplaceApp.Model;
+
 namespace MarketplaceApp.Views;
 
 public partial class DetailPage : ContentPage

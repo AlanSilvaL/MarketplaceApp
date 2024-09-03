@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,20 +7,29 @@ using System.Threading.Tasks;
 
 namespace MarketplaceApp.Model
 {
-    public class StoreProductResponse
+    public partial class StoreProductResponse : ObservableObject
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public double Price { get; set; }
-        public string Description { get; set; }
-        public string Category { get; set; }
-        public string Image { get; set; }
-        public Rating Rating { get; set; }
+        [ObservableProperty]
+        private int id;
+        [ObservableProperty]
+        private string title;
+        [ObservableProperty]
+        private double price;
+        [ObservableProperty]
+        private string description;
+        [ObservableProperty]
+        private string category;
+        [ObservableProperty]
+        private string image;
+        [ObservableProperty]
+        private Rating rating;
     }
 
-    public class Rating
+    public partial class Rating : ObservableObject
     {
-        public double Rate { get; set; }
-        public int Count { get; set; }
+        [ObservableProperty]
+        private double rate;
+        [ObservableProperty]
+        private int count;
     }
 }

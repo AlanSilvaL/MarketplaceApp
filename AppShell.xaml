@@ -13,23 +13,25 @@
             Icon="home.png"
             ContentTemplate="{DataTemplate views:MainPage}"
             Route="MainPage" />
-        <Tab
-            Title="Vaucher"
-            Icon="vaucher.png">
-            <ShellContent
-                ContentTemplate="{DataTemplate views:DetailPage}"
-                Route="SettingsPage" />
-        </Tab>
+        <ShellContent
+                Title="Vaucher"
+                Icon="vaucher.png"
+                ContentTemplate="{DataTemplate views:Vaucher}"
+                Route="Vaucher" />
         <ShellContent
             Title="Wallet"
             Icon="wallet.png"
             ContentTemplate="{DataTemplate views:Wallet}"
-            Route="SettingsPage" />
+            Route="Wallet" />
         <ShellContent
             Title="Settings"
             Icon="settings.png"
             ContentTemplate="{DataTemplate views:Settings}"
-            Route="SettingsPage" />
+            Route="Settings" />
     </TabBar>
     
+    <ShellContent
+        Title="Detail"
+        Route="DetailPage"
+        ContentTemplate="{DataTemplate views:DetailPage}" />
 </Shell>
