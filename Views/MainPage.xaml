@@ -156,7 +156,7 @@
                 <Label Grid.Column="1" Text="See more" FontSize="14" TextColor="#2A927A" Padding="0,23,15,10" HorizontalTextAlignment="End" BackgroundColor="#FCFCFC"/>
             </Grid>-->
             <RefreshView Grid.Row="2" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-                <CollectionView ItemsSource="{Binding Products}" ItemsLayout="VerticalGrid, 2" BackgroundColor="#E7E9EB">
+            <CollectionView ItemsSource="{Binding Products}" ItemsLayout="VerticalGrid, 2" BackgroundColor="#E7E9EB" >
                     <CollectionView.EmptyView>
                         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                             <Label Text="No products available" FontSize="20" TextColor="Gray"/>

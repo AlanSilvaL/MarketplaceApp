@@ -3,7 +3,7 @@ namespace MarketplaceApp.Views;
 
 public partial class DetailPage : ContentPage
 {
-    public DetailPage(MainPageViewModel viewModel)
+    public DetailPage(DetailPageViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
