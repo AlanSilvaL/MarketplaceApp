@@ -31,7 +31,6 @@
     </TabBar>
     
     <ShellContent
-        Title="Detail"
         Route="DetailPage"
         ContentTemplate="{DataTemplate views:DetailPage}" />
 </Shell>

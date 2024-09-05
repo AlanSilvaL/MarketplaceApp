@@ -17,6 +17,8 @@ namespace MarketplaceApp.ViewModel
     {
         private readonly IApiClientService _apiClientService;
 
+        private readonly INavigationService _navigationService;
+
         private bool _isRefreshing;
 
         private StoreProductResponse _selectedProduct;
@@ -52,9 +54,10 @@ namespace MarketplaceApp.ViewModel
             }
         }
 
-        public MainPageViewModel(IApiClientService apiClientService)
+        public MainPageViewModel(IApiClientService apiClientService, INavigationService navigationService)
         {
             _apiClientService = apiClientService;
+            _navigationService = navigationService;
             Products = new ObservableCollection<StoreProductResponse>();
             Categories = new ObservableCollection<CategoryWrapper>();
             RefreshCommand = new Command(async () => await RefreshProducts());
@@ -69,11 +72,13 @@ namespace MarketplaceApp.ViewModel
         {
             if (SelectedProduct != null)
             {
-                var shellNavigation = new ShellNavigationState($"///{nameof(DetailPage)}");
-                await Shell.Current.GoToAsync(shellNavigation, true, new Dictionary<string, object>
+                await _navigationService.NavigateTo(nameof(DetailPage), new Dictionary<string, object>
                 {
-                    { "Product", SelectedProduct }
+                    {
+                        "Product", SelectedProduct
+                    }
                 });
+                SelectedProduct = null;
             }
         }
 

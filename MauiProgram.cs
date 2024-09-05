@@ -1,4 +1,5 @@
-﻿using MarketplaceApp.Services;
+﻿using CommunityToolkit.Maui;
+using MarketplaceApp.Services;
 using MarketplaceApp.ViewModel;
 using MarketplaceApp.Views;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ namespace MarketplaceApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -23,6 +25,7 @@ namespace MarketplaceApp
                 .RegisterServices()
                 .RegisterViewModels()
                 .RegisterViews();
+            RegisterRoutes();
 
 #if DEBUG
             builder.Logging.AddDebug();
@@ -36,13 +39,14 @@ namespace MarketplaceApp
         public static MauiAppBuilder RegisterServices(this MauiAppBuilder builder) 
         {
             builder.Services.AddSingleton<IApiClientService, ApiClientService>();
+            builder.Services.AddSingleton<INavigationService, NavigationService>();
             return builder;
         }
 
         public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder) 
         {
             builder.Services.AddSingleton<MainPageViewModel>();
-            builder.Services.AddSingleton<DetailPageViewModel>();
+            builder.Services.AddTransient<DetailPageViewModel>();
             return builder;
         }
 
@@ -50,8 +54,14 @@ namespace MarketplaceApp
         public static MauiAppBuilder RegisterViews( this MauiAppBuilder builder) 
         {
             builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddSingleton<DetailPage>();
+            builder.Services.AddTransient<DetailPage>();
             return builder;
+        }
+
+        public static void RegisterRoutes()
+        {
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+            Routing.RegisterRoute(nameof(DetailPage), typeof(DetailPage));
         }
 
     }

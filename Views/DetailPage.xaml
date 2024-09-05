@@ -2,17 +2,25 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MarketplaceApp.Views.DetailPage"
-             NavigationPage.HasNavigationBar="False">
+             xmlns:vm="clr-namespace:MarketplaceApp.ViewModel"
+             x:DataType="vm:DetailPageViewModel"
+             NavigationPage.HasNavigationBar="False"
+             Shell.NavBarIsVisible="False">
 
     <VerticalStackLayout Padding="20" Spacing="20" BackgroundColor="#EFF0F1">
         <!-- Tab Bar -->
-        <Grid ColumnDefinitions="Auto,Auto,Auto,Auto">
-            <Button Grid.Column="0" BackgroundColor="Transparent" ImageSource="back.jpg" HeightRequest="20" Margin="0,0,220,0" Padding="0"/>
-            <Image Grid.Column="1" Source="heart.jpg" HeightRequest="20" Margin="0,0,20,0" />
-            <Image Grid.Column="2" Source="share.jpg" HeightRequest="20" Margin="0,0,20,0"/>
-            <Image Grid.Column="3" Source="shopingbag.jpg" HeightRequest="20" Margin="0,0,20,0" />
+        <Grid ColumnDefinitions="auto,*,Auto,Auto,Auto">
+            <Button 
+                BackgroundColor="Transparent" 
+                ImageSource="back.jpg" 
+                HeightRequest="20" 
+                Margin="0" 
+                Padding="0" 
+                Command="{Binding GoBackCommand}"/>
+            <Image Grid.Column="2" Source="heart.jpg" HeightRequest="20" Margin="0,0,20,0"  HorizontalOptions="End"/>
+            <Image Grid.Column="3" Source="share.jpg" HeightRequest="20" Margin="0,0,20,0" HorizontalOptions="End"/>
+            <Image Grid.Column="4" Source="shopingbag.jpg" HeightRequest="20" Margin="0,0,20,0" HorizontalOptions="End"/>
         </Grid>
-
         <!-- Product Image -->
         <Frame CornerRadius="5" BackgroundColor="#E7E9EB">
             <Image Source="{Binding Product.Image}" Aspect="AspectFill" HeightRequest="200" WidthRequest="200"/>

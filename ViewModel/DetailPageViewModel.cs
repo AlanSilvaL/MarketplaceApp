@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MarketplaceApp.Model;
 using MarketplaceApp.Services;
 using System.ComponentModel;
@@ -6,23 +7,28 @@ using System.ComponentModel;
 namespace MarketplaceApp.ViewModel;
 
 
-public partial class DetailPageViewModel : ObservableObject, INotifyPropertyChanged, IQueryAttributable
+public partial class DetailPageViewModel : ObservableObject, IQueryAttributable
 {
     [ObservableProperty]
     private StoreProductResponse product;
 
-    private readonly IApiClientService _apiClientService;
+    private readonly INavigationService _navigationService;
+
+    public Command GoBackCommand { get; set; }
 
 
-    public DetailPageViewModel()
+
+    public DetailPageViewModel(INavigationService navigationService)
     {
+        _navigationService = navigationService;
+        GoBackCommand = new Command(async () => await GoBackToMainPage());
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
 
-    protected virtual void OnPropertyChanged(string propertyName)
+    [RelayCommand]
+    private async Task GoBackToMainPage()
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        await _navigationService.GoBack();
     }
 
 
