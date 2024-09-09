@@ -21,8 +21,9 @@
             <Image Grid.Column="3" Source="share.jpg" HeightRequest="20" Margin="0,0,20,0" HorizontalOptions="End"/>
             <Image Grid.Column="4" Source="shopingbag.jpg" HeightRequest="20" Margin="0,0,20,0" HorizontalOptions="End"/>
         </Grid>
+        
         <!-- Product Image -->
-        <Frame CornerRadius="5" BackgroundColor="#E7E9EB">
+        <Frame CornerRadius="5" BackgroundColor="white">
             <Image Source="{Binding Product.Image}" Aspect="AspectFill" HeightRequest="200" WidthRequest="200"/>
         </Frame>
 
@@ -46,7 +47,7 @@
         <!-- Product Type -->
         <Grid ColumnDefinitions="*,*" RowDefinitions="*,*">
             <Label Grid.Row="0" Text="About Item" FontSize="18" FontAttributes="Bold" TextColor="#2A927A" Padding="0,0,0,10"/>
-            <Label Grid.Row="0" Grid.ColumnSpan="2" Text="______________________________________________" FontSize="18" FontAttributes="Bold" TextColor="#2A927A" Padding="0,10,0,20"/>
+            <Label Grid.Row="0" Grid.ColumnSpan="2" Text="_____________________________________________" FontSize="18" FontAttributes="Bold" TextColor="#2A927A" Padding="0,10,0,20"/>
             <Label Grid.Row="1" Text="Type:" FontSize="15" TextColor="Gray"/>
             <Label Grid.Row="1" Text="{Binding Product.Category}" FontSize="15" FontAttributes="Bold" TextColor="Black" Padding="50,0,0,0"/>
             <Label Grid.Row="1" Grid.Column="1" Text="Color: " FontSize="15" TextColor="Gray"/>
@@ -54,7 +55,6 @@
         </Grid>
 
         <!-- Price / Button Pay-->
-
         <Grid ColumnDefinitions="*,auto" RowDefinitions="auto,*" BackgroundColor="White" Padding="10,0" Margin="-20,0,-20,-500" VerticalOptions="EndAndExpand">
             <Label Grid.Row="0" Text="Total Price"  FontSize="13" TextColor="Gray" Padding="0,20,0,3"/>
             <Label Grid.Row="1" Grid.Column="0" Text="{Binding Product.Price, StringFormat='{}{0:C}'}" FontSize="30" TextColor="#2A927A" FontAttributes="Bold" />

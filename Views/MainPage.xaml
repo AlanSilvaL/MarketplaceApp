@@ -95,8 +95,7 @@
         <CollectionView  
             Grid.Row="1" 
             ItemsSource="{Binding Categories}" 
-            ItemsLayout="HorizontalGrid"
-            Margin="0,0,0,40">
+            ItemsLayout="HorizontalGrid">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid 
@@ -105,7 +104,7 @@
                         ColumnDefinitions="*">
                         <StackLayout 
                             Grid.Row="0"
-                            Margin="0,7,0,10">
+                            Padding="0,7,0,10">
                             <Button
                                 Text="{Binding Icon}"
                                 FontFamily="FASolid"
@@ -130,7 +129,6 @@
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
                                         <Setter Property="FontAttributes" Value="Bold" />
-                                        <Setter Property="FontSize" Value="14" />
                                     </DataTrigger>
                                 </Label.Triggers>
                             </Label>
@@ -141,59 +139,84 @@
         </CollectionView>
         
         <Image 
-                Grid.Row="1"
-                Source="slide.png"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="20"
-                HeightRequest="20"
-                Margin="0,80,0,0"/>
+            Grid.Row="1"
+            Source="slide.png"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="20"
+            HeightRequest="20"
+            Margin="0,90,0,10"/>
 
         <!-- Collection products -->
-        <!--<StackLayout Grid.Row="2">
-            <Grid ColumnDefinitions="*,*">
-                <Label Grid.Column="0" Text="Best Sale Product" FontSize="Medium" FontAttributes="Bold" Padding="15,20,0,10"  BackgroundColor="#FCFCFC"/>
-                <Label Grid.Column="1" Text="See more" FontSize="14" TextColor="#2A927A" Padding="0,23,15,10" HorizontalTextAlignment="End" BackgroundColor="#FCFCFC"/>
-            </Grid>-->
-            <RefreshView 
+        <RefreshView 
                 Grid.Row="2" 
                 Command="{Binding RefreshCommand}" 
                 IsRefreshing="{Binding IsRefreshing}">
             <CollectionView 
-                ItemsSource="{Binding Products}" 
-                SelectionMode="Single" 
-                SelectedItem="{Binding SelectedProduct}" 
-                SelectionChangedCommand="{Binding ProductSelectedCommand}"
-                ItemsLayout="VerticalGrid, 2" 
-                BackgroundColor="#E7E9EB"  >
-                    <CollectionView.EmptyView>
-                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                            <Label Text="No products available" FontSize="20" TextColor="Gray"/>
-                        </StackLayout>
-                    </CollectionView.EmptyView>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame Padding="10" BorderColor="White" CornerRadius="2" Margin="10">
-                                <VerticalStackLayout>
-                                    <!-- Product Image -->
-                                    <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="100" WidthRequest="100"/>
-                                    <!-- Product Type -->
-                                    <Label Text="{Binding Category}" FontSize="13" TextColor="Gray" Padding="0,10,0,0"/>
-                                    <!-- Product Name -->
-                                    <Label Text="{Binding Title}" FontSize="13" FontAttributes="Bold" />
-                                    <!-- Rating and Price -->
-                                    <Grid ColumnDefinitions="auto,auto,*" Padding="0,7,0,0" >
-                                        <Image Source="star.png" HeightRequest="10" WidthRequest="10" Grid.Column="0"/>
-                                        <Label Text="{Binding Rating.Rate}" FontSize="12" TextColor="Gray" Grid.Column="1" Margin="5,4,0,0"/>
-                                        <Label Text="{Binding Price, StringFormat='{}{0:C}'}" FontSize="18" HorizontalOptions="End" TextColor="#2A927A" FontAttributes="Bold" Grid.Column="2"/>
-                                    </Grid>
-                                </VerticalStackLayout>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
-        <!--</StackLayout>-->
+                    ItemsSource="{Binding Products}" 
+                    SelectionMode="Single" 
+                    SelectedItem="{Binding SelectedProduct}" 
+                    SelectionChangedCommand="{Binding ProductSelectedCommand}"
+                    ItemsLayout="VerticalGrid, 2" 
+                    BackgroundColor="#E7E9EB">
+                <CollectionView.EmptyView>
+                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                        <Label Text="No products available" FontSize="20" TextColor="Gray"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid 
+                            Margin="10" 
+                            Padding="10" 
+                            BackgroundColor="White">
+                            <VerticalStackLayout>
+                                <!-- Product Image -->
+                                <Image 
+                                    Source="{Binding Image}" 
+                                    Aspect="AspectFill" 
+                                    HeightRequest="100" 
+                                    WidthRequest="100"/>
+                                <!-- Product Type -->
+                                <Label 
+                                    Text="{Binding Category}" 
+                                    FontSize="13" 
+                                    TextColor="Gray" 
+                                    Padding="0,10,0,0"/>
+                                <!-- Product Name -->
+                                <Label 
+                                    Text="{Binding Title}" 
+                                    FontSize="13" 
+                                    FontAttributes="Bold" />
+                                <!-- Rating and Price -->
+                                <Grid 
+                                    ColumnDefinitions="auto,auto,*" 
+                                    Padding="0,7,0,0" >
+                                    <Image 
+                                        Source="star.png" 
+                                        HeightRequest="10" 
+                                        WidthRequest="10" 
+                                        />
+                                    <Label 
+                                        Grid.Column="1"
+                                        Text="{Binding Rating.Rate}" 
+                                        FontSize="12" 
+                                        TextColor="Gray" 
+                                        Margin="5,4,0,0"/>
+                                    <Label 
+                                        Grid.Column="2"
+                                        Text="{Binding Price, StringFormat='{}{0:C}'}" 
+                                        FontSize="18" HorizontalOptions="End" 
+                                        TextColor="#2A927A" 
+                                        FontAttributes="Bold" 
+                                        />
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </Grid>
     
 </ContentPage>
