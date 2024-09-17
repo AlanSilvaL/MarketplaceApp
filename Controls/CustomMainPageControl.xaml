@@ -2,33 +2,33 @@
 <Border 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="MarketplaceApp.Controls.CustomDetailPageControl"
+    x:Class="MarketplaceApp.Controls.CustomMainPageControl"
     x:Name="ControlReference"
     Margin="10" 
     Padding="10" 
     BackgroundColor="White" 
     StrokeShape="RoundRectangle 5">
-    
-    <VerticalStackLayout>
+
+     <VerticalStackLayout>
         <Image 
-            Source="{Binding Image, Source={Reference ControlReference}}" 
-            Aspect="AspectFill" 
-            HeightRequest="100" 
-            WidthRequest="100"/>
-        <Label Text="{Binding Category}" FontSize="13" TextColor="Gray" />
-        <Label Text="{Binding Title}" FontSize="13" FontAttributes="Bold"/>
+           Source="{Binding Image, Source={Reference ControlReference}}" 
+           Aspect="AspectFill" 
+           HeightRequest="100" 
+           WidthRequest="100"/>
+        <Label Text="{Binding Category, Source={Reference ControlReference}}" FontSize="13" TextColor="Gray" />
+        <Label Text="{Binding Title, Source={Reference ControlReference}}" FontSize="13" FontAttributes="Bold"/>
         <Grid ColumnDefinitions="auto,auto,*" Padding="0,7,0,0">
             <Image Source="star.png" HeightRequest="10" WidthRequest="10"/>
             <Label 
                 Grid.Column="1"
-                Text="{Binding Rating}"
+                Text="{Binding Rating, Source={Reference ControlReference}}"
                 FontSize="12"
                 TextColor="Gray"
                 Margin="5,4,0,0"/>
             <Label 
                 Grid.Column="2"
                 Text="{Binding
-                Price, StringFormat='{}{0:C}'}"
+                Price, Source={Reference ControlReference}, StringFormat='{}{0:C}'}"
                 FontSize="18" HorizontalOptions="End"
                 TextColor="#2A927A"
                 FontAttributes="Bold"/>

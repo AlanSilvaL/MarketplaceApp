@@ -5,7 +5,7 @@
              xmlns:controls="clr-namespace:MarketplaceApp.Controls"
              Title="">
 
-    <ContentPage.Resources>
+ <!--  <ContentPage.Resources>
         <ControlTemplate x:Key="ProductTemplate">
             <Border Margin="10" Padding="10" BackgroundColor="White" StrokeShape="RoundRectangle 5">
                 <VerticalStackLayout>
@@ -32,7 +32,7 @@
             </Border>
         </ControlTemplate>
     </ContentPage.Resources>
-
+-->
 
     <Grid RowDefinitions="auto,auto,*,auto">
 
@@ -195,9 +195,8 @@
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <controls:CustomMainPageView 
-                            ControlTemplate="{StaticResource ProductTemplate}" 
-                            Image="{Binding Image}" 
+                        <controls:CustomMainPageControl
+                            Image="{Binding Image}"
                             Category="{Binding Category}" 
                             Title="{Binding Title}" 
                             Price="{Binding Price}" 

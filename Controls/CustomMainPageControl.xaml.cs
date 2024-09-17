@@ -1,9 +1,10 @@
-﻿namespace MarketplaceApp.Controls;
+namespace MarketplaceApp.Controls;
 
-class CustomMainPageView : ContentView
+public partial class CustomMainPageControl : Border
 {
+
     public static readonly BindableProperty ImageProperty = BindableProperty.Create(
-        nameof(Image), typeof(string), typeof(CustomMainPageView), default(string));
+    nameof(Image), typeof(string), typeof(CustomMainPageControl), default(string));
 
     public string Image
     {
@@ -12,7 +13,7 @@ class CustomMainPageView : ContentView
     }
 
     public static readonly BindableProperty CategoryProperty = BindableProperty.Create(
-        nameof(Category), typeof(string), typeof(CustomMainPageView), default(string));
+        nameof(Category), typeof(string), typeof(CustomMainPageControl), default(string));
 
     public string Category
     {
@@ -21,7 +22,7 @@ class CustomMainPageView : ContentView
     }
 
     public static readonly BindableProperty TitleProperty = BindableProperty.Create(
-        nameof(Title), typeof(string), typeof(CustomMainPageView), default(string));
+        nameof(Title), typeof(string), typeof(CustomMainPageControl), default(string));
 
     public string Title
     {
@@ -30,7 +31,7 @@ class CustomMainPageView : ContentView
     }
 
     public static readonly BindableProperty PriceProperty = BindableProperty.Create(
-    nameof(Price), typeof(decimal), typeof(CustomMainPageView), default(decimal));
+    nameof(Price), typeof(decimal), typeof(CustomMainPageControl), default(decimal));
 
     public decimal Price
     {
@@ -39,11 +40,15 @@ class CustomMainPageView : ContentView
     }
 
     public static readonly BindableProperty RatingProperty = BindableProperty.Create(
-        nameof(Rating), typeof(double), typeof(CustomMainPageView), default(double));
+        nameof(Rating), typeof(double), typeof(CustomMainPageControl), default(double));
 
     public double Rating
     {
         get => (double)GetValue(RatingProperty);
         set => SetValue(RatingProperty, value);
+    }
+    public CustomMainPageControl()
+    {
+        InitializeComponent();
     }
 }
