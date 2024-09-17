@@ -10,5 +10,6 @@ public partial class DetailPage : ContentPage
         InitializeComponent();
         BindingContext = viewModel;
         NavigationPage.SetHasNavigationBar(this, false);
+        Shell.SetTabBarIsVisible(this, false);
     }
 }
