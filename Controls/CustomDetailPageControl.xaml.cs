@@ -1,6 +1,6 @@
 namespace MarketplaceApp.Controls;
 
-public partial class CustomDetailPageControl : ContentView
+public partial class CustomDetailPageControl : VerticalStackLayout
 {
   
     public static readonly BindableProperty ProductImageProperty = BindableProperty.Create(
