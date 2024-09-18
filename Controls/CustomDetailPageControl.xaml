@@ -1,37 +1,69 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Border 
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="MarketplaceApp.Controls.CustomDetailPageControl"
-    x:Name="ControlReference"
-    Margin="10" 
-    Padding="10" 
-    BackgroundColor="White" 
-    StrokeShape="RoundRectangle 5">
-    
-    <VerticalStackLayout>
-        <Image 
-            Source="{Binding Image, Source={Reference ControlReference}}" 
-            Aspect="AspectFill" 
-            HeightRequest="100" 
-            WidthRequest="100"/>
-        <Label Text="{Binding Category}" FontSize="13" TextColor="Gray" />
-        <Label Text="{Binding Title}" FontSize="13" FontAttributes="Bold"/>
-        <Grid ColumnDefinitions="auto,auto,*" Padding="0,7,0,0">
-            <Image Source="star.png" HeightRequest="10" WidthRequest="10"/>
-            <Label 
-                Grid.Column="1"
-                Text="{Binding Rating}"
-                FontSize="12"
-                TextColor="Gray"
-                Margin="5,4,0,0"/>
-            <Label 
-                Grid.Column="2"
-                Text="{Binding
-                Price, StringFormat='{}{0:C}'}"
-                FontSize="18" HorizontalOptions="End"
-                TextColor="#2A927A"
-                FontAttributes="Bold"/>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MarketplaceApp.Controls"
+             x:Class="MarketplaceApp.Controls.CustomDetailPageControl">
+
+    <VerticalStackLayout Padding="20" Spacing="20" BackgroundColor="#EFF0F1">
+
+        <!-- Tab Bar -->
+        <Grid ColumnDefinitions="auto,*,Auto,Auto,Auto">
+            <Button 
+                BackgroundColor="Transparent" 
+                ImageSource="back.jpg" 
+                HeightRequest="20" 
+                Margin="0" 
+                Padding="0" 
+                Command="{Binding GoBackCommand}"/>
+            <Image Grid.Column="2" Source="heart.jpg" HeightRequest="20" Margin="0,0,20,0" HorizontalOptions="End"/>
+            <Image Grid.Column="3" Source="share.jpg" HeightRequest="20" Margin="0,0,20,0" HorizontalOptions="End"/>
+            <Image Grid.Column="4" Source="shopingbag.jpg" HeightRequest="20" Margin="0,0,20,0" HorizontalOptions="End"/>
         </Grid>
+
+        <!-- Product Image -->
+        <Frame CornerRadius="5" BackgroundColor="white">
+            <Image Source="{Binding ProductImage, Source={RelativeSource AncestorType={x:Type controls:CustomDetailPageControl}}}" 
+                   Aspect="AspectFill" HeightRequest="200" WidthRequest="200"/>
+        </Frame>
+
+        <!-- Shop Name -->
+        <HorizontalStackLayout>
+            <Image Source="Shop.png" HeightRequest="15" Margin="10,0,10,0" />
+            <Label Text="Tokobaju.id" FontSize="14" TextColor="Gray" />
+        </HorizontalStackLayout>
+
+        <!-- Product Name -->
+        <Label Text="{Binding ProductTitle, Source={RelativeSource AncestorType={x:Type controls:CustomDetailPageControl}}}" 
+               FontSize="24" FontAttributes="Bold" />
+
+        <!-- Rating / Reviews / Sold -->
+        <Grid ColumnDefinitions="auto,auto,*,*" Padding="0,7,0,0">
+            <Image Grid.Column="0" Source="star.png" HeightRequest="20" WidthRequest="20" />
+            <Label Grid.Column="1" Text="{Binding ProductRating, Source={RelativeSource AncestorType={x:Type controls:CustomDetailPageControl}}}" 
+                   FontSize="16" TextColor="Gray" Margin="5,4,0,0"/>
+            <Label Grid.Column="2" Text="    •     2.3k+ Reviews" FontSize="16" TextColor="Gray"  Margin="5,4,0,0" />
+            <Label Grid.Column="3" Text="    •     2.9k+ Sold" FontSize="16" TextColor="Gray"  Margin="5,4,0,0" />
+        </Grid>
+
+        <!-- Product Type -->
+        <Grid ColumnDefinitions="*,*" RowDefinitions="*,*">
+            <Label Grid.Row="0" Text="About Item" FontSize="18" FontAttributes="Bold" TextColor="#2A927A" Padding="0,0,0,10"/>
+            <Label Grid.Row="0" Grid.ColumnSpan="2" Text="_____________________________________________" 
+                   FontSize="18" FontAttributes="Bold" TextColor="#2A927A" Padding="0,10,0,20"/>
+            <Label Grid.Row="1" Text="Type:" FontSize="15" TextColor="Gray"/>
+            <Label Grid.Row="1" Text="{Binding ProductCategory, Source={RelativeSource AncestorType={x:Type controls:CustomDetailPageControl}}}" 
+                   FontSize="15" FontAttributes="Bold" TextColor="Black" Padding="50,0,0,0"/>
+            <Label Grid.Row="1" Grid.Column="1" Text="Color: " FontSize="15" TextColor="Gray"/>
+            <Label Grid.Row="1" Grid.Column="1" Text="White " FontSize="15" FontAttributes="Bold" TextColor="Black" Padding="50,0,0,0"/>
+        </Grid>
+
+        <!-- Price / Button Pay-->
+        <Grid ColumnDefinitions="*,auto" RowDefinitions="auto,*" BackgroundColor="White" Padding="10,0" Margin="-20,0,-20,-500" VerticalOptions="EndAndExpand">
+            <Label Grid.Row="0" Text="Total Price"  FontSize="13" TextColor="Gray" Padding="0,20,0,3"/>
+            <Label Grid.Row="1" Grid.Column="0" Text="{Binding ProductPrice, Source={RelativeSource AncestorType={x:Type controls:CustomDetailPageControl}}, StringFormat='{}{0:C}'}" 
+                   FontSize="30" TextColor="#2A927A" FontAttributes="Bold" />
+            <Button Grid.Row="1" Grid.Column="1" BackgroundColor="Transparent" ImageSource="buybutton.jpg" HeightRequest="40" Padding="0" Margin="0,0,10,10" />
+        </Grid>
+
     </VerticalStackLayout>
-</Border>
+
+</ContentView>
