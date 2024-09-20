@@ -200,6 +200,7 @@
                             Category="{Binding Category}" 
                             Title="{Binding Title}" 
                             Price="{Binding Price}" 
+                            Discount="{Binding Discount}"
                             Rating="{Binding Rating.Rate}"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

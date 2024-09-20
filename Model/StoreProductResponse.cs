@@ -23,6 +23,9 @@ namespace MarketplaceApp.Model
         private string image;
         [ObservableProperty]
         private Rating rating;
+
+        [ObservableProperty]
+        private int discount;
     }
 
     public partial class Rating : ObservableObject

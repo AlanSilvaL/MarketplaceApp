@@ -119,10 +119,19 @@ namespace MarketplaceApp.ViewModel
             if (response.IsSuccessful && response.Data != null)
             {
                 Products.Clear();
+                Random rnd = new Random();
 
                 //Products = new ObservableCollection<StoreProductResponse>(response.Data);
                 foreach (var product in response.Data)
                 {
+                    if(rnd.NextDouble() < 0.3)
+                    {
+                        product.Discount = rnd.Next(0, 16);
+                    }
+                    else
+                    {
+                        product.Discount = 0;
+                    }
                     Products.Add(product);
                 }
             }

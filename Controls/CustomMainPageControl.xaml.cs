@@ -1,3 +1,4 @@
+
 namespace MarketplaceApp.Controls;
 
 public partial class CustomMainPageControl : Border
@@ -47,6 +48,38 @@ public partial class CustomMainPageControl : Border
         get => (double)GetValue(RatingProperty);
         set => SetValue(RatingProperty, value);
     }
+
+
+    public static readonly BindableProperty DiscountProperty = BindableProperty.Create(
+        nameof(Discount),
+        typeof(int),
+        typeof(CustomMainPageControl),
+        default(int),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var view = (CustomMainPageControl)bindable;
+            var discount = (int)newValue;
+
+            if (discount != 0)
+            {
+                view.DiscountLabel.IsVisible = true;
+                view.DiscountLabel.Text = view.Price.ToString("C");
+                view.DiscountLabel.TextDecorations = TextDecorations.Strikethrough;
+                view.Price -= view.Price * ((decimal)discount / 100);
+            }
+        });
+        
+    //private static void DiscountChanged(BindableObject bindable, object oldValue, object newValue)
+    //{
+        
+    //}
+
+    public int Discount
+    {
+        get => (int)GetValue(DiscountProperty);
+        set => SetValue(DiscountProperty, value);
+    }
+
     public CustomMainPageControl()
     {
         InitializeComponent();
