@@ -32,11 +32,11 @@ public partial class CustomMainPageControl : Border
     }
 
     public static readonly BindableProperty PriceProperty = BindableProperty.Create(
-    nameof(Price), typeof(decimal), typeof(CustomMainPageControl), default(decimal));
+    nameof(Price), typeof(double), typeof(CustomMainPageControl), default(double));
 
-    public decimal Price
+    public double Price
     {
-        get => (decimal)GetValue(PriceProperty);
+        get => (double)GetValue(PriceProperty);
         set => SetValue(PriceProperty, value);
     }
 
@@ -54,7 +54,7 @@ public partial class CustomMainPageControl : Border
         nameof(Discount),
         typeof(int),
         typeof(CustomMainPageControl),
-        default(int),
+        -1,
         propertyChanged: (bindable, oldValue, newValue) =>
         {
             var view = (CustomMainPageControl)bindable;
@@ -62,11 +62,19 @@ public partial class CustomMainPageControl : Border
 
             if (discount != 0)
             {
-                view.DiscountLabel.IsVisible = true;
-                view.DiscountLabel.Text = view.Price.ToString("C");
-                view.DiscountLabel.TextDecorations = TextDecorations.Strikethrough;
-                view.Price -= view.Price * ((decimal)discount / 100);
+                view.RedLabel.IsVisible = true;
+                view.RedLabel.Text = view.Price.ToString("C");
+                view.RedLabel.TextDecorations = TextDecorations.Strikethrough;
+
+                var disc = ((double)discount / 100);
+                var pri = view.Price * disc;
+
+                view.GreenLabel.Text = (view.Price - pri).ToString("C");
+                return;
             }
+
+            view.RedLabel.IsVisible = false;
+            view.GreenLabel.Text = view.Price.ToString("C");
         });
         
     //private static void DiscountChanged(BindableObject bindable, object oldValue, object newValue)

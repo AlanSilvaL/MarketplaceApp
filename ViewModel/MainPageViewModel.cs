@@ -3,13 +3,8 @@ using MarketplaceApp.Model;
 using MarketplaceApp.Model.Wrappers;
 using MarketplaceApp.Services;
 using MarketplaceApp.Views;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MarketplaceApp.ViewModel
 {
@@ -119,12 +114,15 @@ namespace MarketplaceApp.ViewModel
             if (response.IsSuccessful && response.Data != null)
             {
                 Products.Clear();
+                
                 Random rnd = new Random();
 
                 //Products = new ObservableCollection<StoreProductResponse>(response.Data);
                 foreach (var product in response.Data)
                 {
-                    if(rnd.NextDouble() < 0.3)
+                    product.Blackfriday = false;
+
+                    if (rnd.NextDouble() < 0.5)
                     {
                         product.Discount = rnd.Next(0, 16);
                     }
@@ -132,6 +130,12 @@ namespace MarketplaceApp.ViewModel
                     {
                         product.Discount = 0;
                     }
+
+                    if (rnd.NextDouble() < 0.3 && product.Discount == 0)
+                    {
+                        product.Blackfriday = true;
+                    }
+
                     Products.Add(product);
                 }
             }

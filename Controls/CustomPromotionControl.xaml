@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Border 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MarketplaceApp.Controls"
+    x:Class="MarketplaceApp.Controls.CustomPromotionControl"
+    Margin="10" 
+    Padding="10" 
+    BackgroundColor="black" 
+    StrokeShape="RoundRectangle 5">
+
+
+        <!-- Product image -->
+    <Border Padding="10,5,10,5" StrokeShape="RoundRectangle 5" BackgroundColor="white">
+        <Image 
+            Grid.Row="1"
+            Source="{Binding BFImage, Source={RelativeSource AncestorType={x:Type controls:CustomPromotionControl}}}" 
+            Aspect="AspectFill" 
+            HeightRequest="150" 
+            WidthRequest="150" 
+            HorizontalOptions="Center" 
+            VerticalOptions="Center" />
+    </Border>
+</Border>

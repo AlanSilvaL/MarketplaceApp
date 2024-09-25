@@ -30,7 +30,7 @@
             <HorizontalStackLayout Grid.Column="2" HorizontalOptions="End" Spacing="5">
                 <!-- Discount -->
                 <Label 
-                    x:Name="DiscountLabel"
+                    x:Name="RedLabel"
                     TextColor="red"
                     FontSize="12"
                     FontAttributes="Bold"
@@ -39,10 +39,7 @@
 
                 <!-- Price -->
                 <Label 
-                    x:Name="PriceLabel"
-                    Text="{Binding Price,
-                        Source={Reference ControlReference}, 
-                        StringFormat='{}{0:C}'}"
+                    x:Name="GreenLabel"
                     TextColor="#2A927A"
                     FontSize="18"
                     FontAttributes="Bold"/>

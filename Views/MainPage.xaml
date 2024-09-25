@@ -1,38 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MarketplaceApp.Views.MainPage"
+             xmlns:local="clr-namespace:MarketplaceApp.Selectors" 
              xmlns:controls="clr-namespace:MarketplaceApp.Controls"
+             x:Class="MarketplaceApp.Views.MainPage"
              Title="">
 
- <!--  <ContentPage.Resources>
-        <ControlTemplate x:Key="ProductTemplate">
-            <Border Margin="10" Padding="10" BackgroundColor="White" StrokeShape="RoundRectangle 5">
-                <VerticalStackLayout>
-                    <Image Source="{TemplateBinding Image}" Aspect="AspectFill" HeightRequest="100" WidthRequest="100"/>
-                    <Label Text="{TemplateBinding Category}" FontSize="13" TextColor="Gray" />
-                    <Label Text="{TemplateBinding Title}" FontSize="13" FontAttributes="Bold"/>
-                    <Grid ColumnDefinitions="auto,auto,*" Padding="0,7,0,0">
-                        <Image Source="star.png" HeightRequest="10" WidthRequest="10"/>
-                        <Label 
-                            Grid.Column="1" 
-                            Text="{TemplateBinding Rating}" 
-                            FontSize="12" 
-                            TextColor="Gray" 
-                            Margin="5,4,0,0"/>
-                        <Label 
-                            Grid.Column="2" 
-                            Text="{TemplateBinding
-                            Price, StringFormat='{}{0:C}'}"
-                            FontSize="18" HorizontalOptions="End"
-                            TextColor="#2A927A"
-                            FontAttributes="Bold"/>
-                    </Grid>
-                </VerticalStackLayout>
-            </Border>
-        </ControlTemplate>
+    <ContentPage.Resources>
+        <!-- Black Friday Products -->
+        <DataTemplate x:Key="BlackFridayTemplate">
+            <controls:CustomPromotionControl
+                            BFImage="{Binding Image}"
+                            BlackFriday="{Binding BlackFriday}"/>
+        </DataTemplate>
+
+        <!-- Normal Products -->
+        <DataTemplate x:Key="NormalTemplate">
+            <controls:CustomMainPageControl
+                            Image="{Binding Image}"
+                            Category="{Binding Category}" 
+                            Title="{Binding Title}" 
+                            Price="{Binding Price}" 
+                            Discount="{Binding Discount}"
+                            Rating="{Binding Rating.Rate}"/>
+        </DataTemplate>
+
+        <!-- DataTemplateSelector -->
+        <local:ProductTemplateSelector x:Key="ProductTemplateSelector"
+                                    BlackFridayTemplate="{StaticResource BlackFridayTemplate}"
+                                    NormalTemplate="{StaticResource NormalTemplate}" />
     </ContentPage.Resources>
--->
 
     <Grid RowDefinitions="auto,auto,*,auto">
 
@@ -177,33 +174,21 @@
             Margin="0,90,0,10"/>
 
         <!-- Collection products -->
-        <RefreshView 
-                Grid.Row="2" 
-                Command="{Binding RefreshCommand}" 
-                IsRefreshing="{Binding IsRefreshing}">
+        <RefreshView Grid.Row="2" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
             <CollectionView 
                     ItemsSource="{Binding Products}" 
                     SelectionMode="Single" 
+                    ItemSizingStrategy="MeasureAllItems"
                     SelectedItem="{Binding SelectedProduct}" 
                     SelectionChangedCommand="{Binding ProductSelectedCommand}"
                     ItemsLayout="VerticalGrid, 2" 
-                    BackgroundColor="#E7E9EB">
+                    BackgroundColor="#E7E9EB"
+                    ItemTemplate="{StaticResource ProductTemplateSelector}">
                 <CollectionView.EmptyView>
                     <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                         <Label Text="No products available" FontSize="20" TextColor="Gray"/>
                     </StackLayout>
                 </CollectionView.EmptyView>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <controls:CustomMainPageControl
-                            Image="{Binding Image}"
-                            Category="{Binding Category}" 
-                            Title="{Binding Title}" 
-                            Price="{Binding Price}" 
-                            Discount="{Binding Discount}"
-                            Rating="{Binding Rating.Rate}"/>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
     </Grid>

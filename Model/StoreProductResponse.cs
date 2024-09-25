@@ -26,6 +26,9 @@ namespace MarketplaceApp.Model
 
         [ObservableProperty]
         private int discount;
+
+        [ObservableProperty]
+        private bool blackfriday;
     }
 
     public partial class Rating : ObservableObject
