@@ -2,23 +2,65 @@
 <Border 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:MarketplaceApp.Controls"
     x:Class="MarketplaceApp.Controls.CustomPromotionControl"
-    Margin="10" 
-    Padding="10" 
-    BackgroundColor="black" 
-    StrokeShape="RoundRectangle 5">
+    x:Name="ControlReference"
+    StrokeShape="RoundRectangle 10"
+    Padding="15"
+    StrokeThickness="1"
+    Stroke="#E7E9EB" 
+    BackgroundColor="#212121"
+    HorizontalOptions="Center"
+    VerticalOptions="Center">
 
+    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="Auto, *" Padding="0" BackgroundColor="Transparent">
 
-        <!-- Product image -->
-    <Border Padding="10,5,10,5" StrokeShape="RoundRectangle 5" BackgroundColor="white">
+        <!-- Title -->
         <Image 
+            Grid.Row="0"
+            Grid.Column="0"
+            Source="blackfriday.png"
+            HeightRequest="70"
+            WidthRequest="150"
+            Aspect="AspectFit"
+            Margin="0,0,0,10"/>
+
+        <!-- Imagen del Producto -->
+        <Border 
             Grid.Row="1"
-            Source="{Binding BFImage, Source={RelativeSource AncestorType={x:Type controls:CustomPromotionControl}}}" 
-            Aspect="AspectFill" 
-            HeightRequest="150" 
-            WidthRequest="150" 
-            HorizontalOptions="Center" 
-            VerticalOptions="Center" />
-    </Border>
+            Grid.ColumnSpan="2"
+            StrokeShape="RoundRectangle 10"
+            Stroke="#E7E9EB"
+            BackgroundColor="White"
+            HeightRequest="150"
+            WidthRequest="150"
+            HorizontalOptions="Center">
+            <Image 
+                Source="{Binding BFImage, Source={x:Reference ControlReference}}" 
+                Aspect="AspectFit"
+                Margin="0"/>
+        </Border>
+
+            <!-- Sepacer -->
+            <BoxView
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            HeightRequest="1"
+            BackgroundColor="#E7E9EB"
+            Margin="0,15,0,15" />
+
+            <!-- Button -->
+            <Button 
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Text="Buy Now"
+            FontSize="14"
+            TextColor="White"
+            BackgroundColor="#FF3B30"
+            CornerRadius="20"
+            WidthRequest="140"
+            HeightRequest="40"
+            Margin="0,10,0,0"
+            HorizontalOptions="Center"
+            VerticalOptions="End"/>
+    </Grid>
 </Border>

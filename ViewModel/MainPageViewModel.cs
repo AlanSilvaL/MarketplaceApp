@@ -134,6 +134,7 @@ namespace MarketplaceApp.ViewModel
                     if (rnd.NextDouble() < 0.3 && product.Discount == 0)
                     {
                         product.Blackfriday = true;
+                        
                     }
 
                     Products.Add(product);

@@ -10,25 +10,28 @@
         <!-- Black Friday Products -->
         <DataTemplate x:Key="BlackFridayTemplate">
             <controls:CustomPromotionControl
-                            BFImage="{Binding Image}"
-                            BlackFriday="{Binding BlackFriday}"/>
+                    BFImage="{Binding Image}"
+                    BlackFriday="{Binding BlackFriday}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"/>
         </DataTemplate>
 
         <!-- Normal Products -->
         <DataTemplate x:Key="NormalTemplate">
             <controls:CustomMainPageControl
-                            Image="{Binding Image}"
-                            Category="{Binding Category}" 
-                            Title="{Binding Title}" 
-                            Price="{Binding Price}" 
-                            Discount="{Binding Discount}"
-                            Rating="{Binding Rating.Rate}"/>
+                    Image="{Binding Image}"
+                    Category="{Binding Category}" 
+                    Title="{Binding Title}" 
+                    Price="{Binding Price}" 
+                    Discount="{Binding Discount}"
+                    Rating="{Binding Rating.Rate}"
+                    VerticalOptions="Center"/>
         </DataTemplate>
 
         <!-- DataTemplateSelector -->
         <local:ProductTemplateSelector x:Key="ProductTemplateSelector"
-                                    BlackFridayTemplate="{StaticResource BlackFridayTemplate}"
-                                    NormalTemplate="{StaticResource NormalTemplate}" />
+                                       BlackFridayTemplate="{StaticResource BlackFridayTemplate}"
+                                       NormalTemplate="{StaticResource NormalTemplate}" />
     </ContentPage.Resources>
 
     <Grid RowDefinitions="auto,auto,*,auto">
