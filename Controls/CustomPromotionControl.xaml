@@ -4,16 +4,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="MarketplaceApp.Controls.CustomPromotionControl"
     x:Name="ControlReference"
-    StrokeShape="RoundRectangle 10"
-    Padding="15"
-    StrokeThickness="1"
-    Stroke="#E7E9EB" 
-    BackgroundColor="#212121"
+    StrokeShape="RoundRectangle 20"
+    Stroke="#FF3B30" 
+    BackgroundColor="Transparent"
     HorizontalOptions="Center"
     VerticalOptions="Center">
 
-    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="Auto, *" Padding="0" BackgroundColor="Transparent">
 
+    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="Auto, *" Padding="15">
+
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#212121" Offset="0.0" />
+                <GradientStop Color="#424242" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        
         <!-- Title -->
         <Image 
             Grid.Row="0"
@@ -22,45 +28,45 @@
             HeightRequest="70"
             WidthRequest="150"
             Aspect="AspectFit"
-            Margin="0,0,0,10"/>
+            Margin="0,0,0,10"
+            HorizontalOptions="Center">
+            <Image.Shadow>
+                <Shadow Brush="White" Radius="10" Offset="5,5"/>
+            </Image.Shadow>
+        </Image>
 
-        <!-- Imagen del Producto -->
+        <!-- Image -->
         <Border 
             Grid.Row="1"
             Grid.ColumnSpan="2"
-            StrokeShape="RoundRectangle 10"
-            Stroke="#E7E9EB"
+            StrokeShape="RoundRectangle 20"
+            Stroke="Transparent"
             BackgroundColor="White"
-            HeightRequest="150"
-            WidthRequest="150"
-            HorizontalOptions="Center">
+            HeightRequest="180"
+            WidthRequest="180"
+            HorizontalOptions="Center"
+            Margin="0">
             <Image 
                 Source="{Binding BFImage, Source={x:Reference ControlReference}}" 
                 Aspect="AspectFit"
                 Margin="0"/>
         </Border>
 
-            <!-- Sepacer -->
-            <BoxView
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
-            HeightRequest="1"
-            BackgroundColor="#E7E9EB"
-            Margin="0,15,0,15" />
-
-            <!-- Button -->
-            <Button 
+        <!-- Button -->
+        <Button 
             Grid.Row="3"
             Grid.ColumnSpan="2"
             Text="Buy Now"
-            FontSize="14"
+            FontSize="16"
             TextColor="White"
-            BackgroundColor="#FF3B30"
-            CornerRadius="20"
-            WidthRequest="140"
-            HeightRequest="40"
+            BackgroundColor="#FF3B30" 
+            CornerRadius="25"
+            WidthRequest="160"
+            HeightRequest="50"
             Margin="0,10,0,0"
             HorizontalOptions="Center"
-            VerticalOptions="End"/>
+            VerticalOptions="End">
+        </Button>
+
     </Grid>
 </Border>
