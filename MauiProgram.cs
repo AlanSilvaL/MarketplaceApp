@@ -55,6 +55,7 @@ namespace MarketplaceApp
         {
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddTransient<DetailPage>();
+            builder.Services.AddTransient<CartPage>();
             return builder;
         }
 
@@ -62,6 +63,7 @@ namespace MarketplaceApp
         {
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(DetailPage), typeof(DetailPage));
+            Routing.RegisterRoute(nameof(CartPage), typeof(CartPage));
         }
 
     }

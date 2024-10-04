@@ -23,6 +23,7 @@ namespace MarketplaceApp.ViewModel
         public Command<CategoryWrapper> SelectCategoryCommand { get; }
         public Command RefreshCommand { get; set; }
         public Command ProductSelectedCommand { get; }
+        public Command BuyCommand { get; }
         public StoreProductResponse SelectedProduct
         {
             get => _selectedProduct;
@@ -58,9 +59,15 @@ namespace MarketplaceApp.ViewModel
             RefreshCommand = new Command(async () => await RefreshProducts());
             SelectCategoryCommand = new Command<CategoryWrapper>(async (param) => await OnCategorySelected(param));
             ProductSelectedCommand = new Command(async () => await OnProductSelected());
+            BuyCommand = new Command(async () => await NavigateToCartPage());
 
             GetProducts();
             LoadCategories();
+        }
+
+        private async Task NavigateToCartPage()
+        {
+            await _navigationService.NavigateTo(nameof(CartPage));
         }
 
         private async Task OnProductSelected()

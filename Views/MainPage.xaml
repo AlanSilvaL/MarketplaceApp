@@ -4,14 +4,19 @@
              xmlns:local="clr-namespace:MarketplaceApp.Selectors" 
              xmlns:controls="clr-namespace:MarketplaceApp.Controls"
              x:Class="MarketplaceApp.Views.MainPage"
+             x:Name="ParentControlReference"
              Title="">
-
+    
+    <!--BuyCommand="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.BuyCommand}"-->
+    
     <ContentPage.Resources>
         <!-- Black Friday Products -->
         <DataTemplate x:Key="BlackFridayTemplate">
             <controls:CustomPromotionControl
                     BFImage="{Binding Image}"
                     BlackFriday="{Binding BlackFriday}"
+                    
+                    BuyCommand="{Binding Source={x:Reference ParentControlReference}, Path=BindingContext.BuyCommand}"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"/>
         </DataTemplate>

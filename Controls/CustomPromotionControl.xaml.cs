@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace MarketplaceApp.Controls;
 
 public partial class CustomPromotionControl : Border
@@ -20,9 +22,16 @@ public partial class CustomPromotionControl : Border
         set => SetValue(BlackFridayProperty, value);
     }
 
+    public static readonly BindableProperty BuyCommandProperty = BindableProperty.Create(
+    nameof(BuyCommand), typeof(Command), typeof(CustomPromotionControl));
+    public Command BuyCommand
+    {
+        get => (Command)GetValue(BuyCommandProperty);
+        set => SetValue(BuyCommandProperty, value);
+    }
+
     public CustomPromotionControl()
 	{
 		InitializeComponent();
-        BindingContext = this;
     }
 }
